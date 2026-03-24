@@ -4,8 +4,14 @@ import Navbar from '@/src/components/layout/navbar';
 import Footer from '@/src/components/layout/footer';
 
 export const metadata = {
-  title: 'VidyaBharatii - Education for All',
-  description: 'VidyaBharatii is a coaching center dedicated to providing quality education to students across India.',
+  title: 'VidyaBharatii - Premier Coaching & Education for All',
+  description: 'VidyaBharatii is a premier coaching center providing world-class education, JEE preparation, NEET coaching, and competitive exam training across India.',
+  keywords: 'coaching, education, JEE, NEET, competitive exams, India',
+  authors: [{ name: 'VidyaBharatii' }],
+  viewport: 'width=device-width, initial-scale=1, maximum-scale=5',
+  themeColor: '#1e3a8a',
+  robots: 'index, follow',
+  canonical: 'https://vidyabharatii.org',
 };
 
 export default function RootLayout({

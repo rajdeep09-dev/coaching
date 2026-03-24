@@ -61,19 +61,3 @@ export default function PartnersSection() {
     </section>
   );
 }
-
-// Add marquee animation keyframes
-if (typeof document !== 'undefined') {
-  const style = document.createElement('style');
-  style.textContent = `
-    @keyframes marquee {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-    .animate-marquee {
-      display: flex;
-      animation: marquee 30s linear infinite;
-    }
-  `;
-  document.head.appendChild(style);
-}

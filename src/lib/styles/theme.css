@@ -205,6 +205,11 @@
   100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
 }
 
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
 /* Enhanced Utility Classes */
 .floating-premium {
   animation: float 8s ease-in-out infinite;
@@ -230,6 +235,24 @@
 
 .floating-3d {
   animation: float3D 6s ease-in-out infinite;
+}
+
+.animate-marquee {
+  display: flex;
+  animation: marquee 30s linear infinite;
+}
+
+/* Animation Delay Utilities */
+.delay-200 {
+  animation-delay: 200ms;
+}
+
+.delay-400 {
+  animation-delay: 400ms;
+}
+
+.delay-600 {
+  animation-delay: 600ms;
 }
 
 /* Premium Shadows and Depth */

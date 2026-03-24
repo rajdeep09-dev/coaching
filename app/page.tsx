@@ -8,9 +8,14 @@ import PartnersSection from '@/src/components/sections/partners';
 import NewsletterSection from '@/src/components/sections/newsletter';
 import CtaBanner from '@/src/components/sections/cta-banner';
 
+export const metadata = {
+  title: 'VidyaBharatii - Premier Coaching & Education for All',
+  description: 'VidyaBharatii provides world-class coaching for JEE, NEET, CAT, and competitive exams. Transform your future with expert faculty and proven results.',
+};
+
 export default function Home() {
   return (
-    <div className="space-y-12">
+    <main className="space-y-12">
       <HeroSection />
       <StatsSection />
       <AboutSection />
@@ -20,6 +25,6 @@ export default function Home() {
       <PartnersSection />
       <NewsletterSection />
       <CtaBanner />
-    </div>
+    </main>
   );
 }

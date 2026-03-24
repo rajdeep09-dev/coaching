@@ -1,7 +1,34 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Standard Next.js config
+  // React configuration
   reactStrictMode: true,
+  swcMinify: true,
+  
+  // Compression
+  compress: true,
+  
+  // Headers for security and optimization
+  headers: async () => {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+          {
+            key: 'X-Frame-Options',
+            value: 'SAMEORIGIN',
+          },
+          {
+            key: 'X-XSS-Protection',
+            value: '1; mode=block',
+          },
+        ],
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;

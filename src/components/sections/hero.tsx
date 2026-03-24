@@ -59,7 +59,7 @@ export default function HeroSection() {
                 style={{ backgroundImage: `url(${slide.image})` }}
               ></div>
               {/* Content */}
-              <div className="relative z-20 pt-24 pb-20 text-center">
+              <div className="relative z-20 h-full flex flex-col items-center justify-center container-premium mx-auto px-4 sm:px-6 lg:px-8">
                 <h1 className="text-5xl font-bold text-white gradient-text-premium mb-6 animate-slide-up-premium">
                   {slide.title}
                 </h1>

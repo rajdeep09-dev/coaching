@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState, Component } from 'react';
 import Link from 'next/link';
 import { Inter } from 'next/font/google';
 import { Cormorant_Garamond } from 'next/font/google';
@@ -103,7 +103,7 @@ const SectionTitle = ({ title, subtitle }: SectionTitleProps) => (
 );
 
 // ---------- Simple Error Boundary ----------
-class ErrorBoundary extends React.Component<
+class ErrorBoundary extends Component<
   { children: React.ReactNode; fallback?: React.ReactNode },
   { hasError: boolean }
 > {

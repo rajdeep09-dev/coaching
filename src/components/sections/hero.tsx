@@ -1,105 +1,84 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-
 export default function HeroSection() {
-  const [slideIndex, setSlideIndex] = useState(0);
-  const slides = [
-    {
-      title: 'Empowering Education Across India',
-      subtitle: 'World-class coaching for every aspiring student',
-      // We'll use placeholder images for now
-      image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
-      bgColor: 'from-primary to-accent',
-    },
-    {
-      title: 'Holistic Learning Environment',
-      subtitle: 'Nurturing excellence through innovative pedagogy',
-      image: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
-      bgColor: 'from-accent to-primary',
-    },
-    {
-      title: 'Expert Faculty, Proven Results',
-      subtitle: 'Guidance from renowned educators and industry leaders',
-      image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
-      bgColor: 'from-primary to-accent',
-    },
-  ];
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setSlideIndex((prev) => (prev + 1) % slides.length);
-    }, 7000); // Change slide every 7 seconds for premium feel
-
-    return () => clearInterval(interval);
-  }, []);
-
   return (
-    <section className="relative">
-      {/* Slider Container */}
-      <div className="absolute inset-0">
-        {slides.map((slide, index) => (
-          <div
-            key={index}
-            className={`absolute inset-0 flex items-center justify-center ${
-              index === slideIndex
-                ? 'opacity-100 transition-opacity duration-2000 ease-in-out'
-                : 'opacity-0 transition-opacity duration-2000 ease-in-out'
-            }`}
+    <section className="relative min-h-screen w-full pt-20 overflow-hidden">
+      {/* Elegant Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-neutral-50 via-neutral-100 to-neutral-50 dark:from-neutral-950 dark:via-neutral-900 dark:to-neutral-950"></div>
+      
+      {/* Subtle accent elements */}
+      <div className="absolute top-20 right-0 w-96 h-96 bg-yellow-600/5 rounded-full blur-3xl dark:bg-yellow-400/5"></div>
+      <div className="absolute -bottom-40 left-20 w-80 h-80 bg-green-600/5 rounded-full blur-3xl dark:bg-green-400/5"></div>
+
+      {/* Content Container */}
+      <div className="container-luxury relative z-10 h-full flex flex-col items-center justify-center py-24 sm:py-32">
+        <div className="text-center max-w-4xl mx-auto animate-fade-in">
+          {/* Tagline */}
+          <p 
+            className="text-sm text-yellow-600 dark:text-yellow-400 tracking-widest font-bold mb-6 uppercase"
+            style={{ fontFamily: 'var(--font-body)' }}
           >
-            {/* Ken Burns Effect Container */}
-            <div className="relative w-full h-[90vh] min-h-[700px] overflow-hidden">
-              {/* Background Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-black/50 to-black/30"></div>
-              {/* Premium Image with Ken Burns Effect */}
-              <div 
-                className={`absolute inset-0 bg-center bg-cover bg-no-repeat transition-transform duration-30000 ease-in-out ${
-                  index === 0 ? 'scale-115' : index === 1 ? 'scale-110 scale-x-105' : 'scale-120 scale-y-110'
-                }`}
-                style={{ backgroundImage: `url(${slide.image})` }}
-              ></div>
-              {/* Content */}
-              <div className="relative z-20 h-full flex flex-col items-center justify-center container-premium mx-auto px-4 sm:px-6 lg:px-8">
-                <h1 className="text-5xl font-bold text-white gradient-text-premium mb-6 animate-slide-up-premium">
-                  {slide.title}
-                </h1>
-                <p className="text-2xl text-white/90 max-w-3xl mx-auto mb-10 animate-slide-up-premium delay-200">
-                  {slide.subtitle}
-                </p>
-                <div className="flex justify-center space-x-6 flex-wrap animate-slide-up-premium delay-400">
-                  <a 
-                    href="/programs" 
-                    className="px-8 py-3 bg-white/15 backdrop-blur-sm rounded-xl hover:bg-white/20 transition-all-premium border border-white/20 text-white/90 hover:text-white font-semibold"
-                  >
-                    Explore Programs
-                  </a>
-                  <a 
-                    href="/donate" 
-                    className="px-8 py-3 bg-gradient-to-r from-primary to-accent hover:from-primary-dark hover:to-accent-dark rounded-xl transform hover:-translate-y-2 hover:shadow-lg transition-all-premium text-white font-semibold"
-                  >
-                    Donate Now
-                  </a>
+            Excellence in Education
+          </p>
+
+          {/* Main Heading */}
+          <h1 
+            className="text-5xl sm:text-6xl lg:text-7xl font-bold text-neutral-900 dark:text-neutral-50 mb-8 leading-tight"
+            style={{ fontFamily: 'var(--font-display)', letterSpacing: 'var(--letter-spacing-wide)' }}
+          >
+            Transform Your Future
+            <br />
+            <span className="gradient-text-luxury">With Excellence</span>
+          </h1>
+
+          {/* Subtitle */}
+          <p 
+            className="text-lg sm:text-xl text-neutral-600 dark:text-neutral-300 mb-12 max-w-2xl mx-auto leading-relaxed"
+            style={{ fontFamily: 'var(--font-body)' }}
+          >
+            Experience world-class coaching with expert faculty, proven results, and a commitment to your success. Join thousands of students who've transformed their futures.
+          </p>
+
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+            <button 
+              className="px-10 py-4 bg-neutral-900 dark:bg-yellow-600 text-white dark:text-neutral-900 rounded-lg hover:shadow-luxury transition-all duration-300 font-bold tracking-wide"
+              style={{ fontFamily: 'var(--font-display)' }}
+            >
+              Book Consultation
+            </button>
+            <button 
+              className="px-10 py-4 border-2 border-neutral-900 dark:border-yellow-600 text-neutral-900 dark:text-yellow-600 rounded-lg hover:bg-neutral-900 hover:text-white dark:hover:bg-yellow-600 dark:hover:text-neutral-900 transition-all duration-300 font-bold tracking-wide"
+              style={{ fontFamily: 'var(--font-display)' }}
+            >
+              Explore Programs
+            </button>
+          </div>
+
+          {/* Trust Indicators */}
+          <div className="mt-20 pt-12 border-t border-neutral-200 dark:border-neutral-800">
+            <p className="text-sm text-neutral-500 dark:text-neutral-400 mb-8 tracking-widest uppercase font-medium">
+              Trusted by Leading Institutions
+            </p>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 items-center justify-items-center">
+              {['98% Pass Rate', '50K+ Students', 'Expert Faculty', 'Premium Support'].map((stat, i) => (
+                <div key={i} className="text-center">
+                  <p className="text-2xl sm:text-3xl font-bold text-neutral-900 dark:text-neutral-50" style={{ fontFamily: 'var(--font-display)' }}>
+                    {stat.split(' ')[0]}
+                  </p>
+                  <p className="text-xs text-neutral-600 dark:text-neutral-400 mt-2 uppercase tracking-wide">{stat.split(' ').slice(1).join(' ')}</p>
                 </div>
-              </div>
+              ))}
             </div>
           </div>
-        ))}
+        </div>
       </div>
 
-      {/* Premium Slide Indicators */}
-      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex space-x-4 z-30">
-        {slides.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setSlideIndex(index)}
-            className={`w-3 h-3 rounded-full transition-all-premium ${
-              index === slideIndex
-                ? 'bg-white/80 hover:bg-white/90'
-                : 'bg-white/30 hover:bg-white/50'
-            }`}
-            aria-label={`Slide ${index + 1}`}
-          />
-        ))}
+      {/* Scroll Indicator */}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 animate-bounce">
+        <svg className="w-6 h-6 text-neutral-400 dark:text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+        </svg>
       </div>
     </section>
   );

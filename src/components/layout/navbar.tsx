@@ -3,17 +3,33 @@
 import { useState, useEffect } from 'react';
 import { useTheme } from '@/src/lib/theme-provider';
 import Link from 'next/link';
+import type { FC } from 'react';
 
-// We'll use reactive placeholders for icons, in case react-icons is not available
-// We can replace these with actual icons once the package is installed
-const Menu = () => <span className="text-2xl">☰</span>;
-const X = () => <span className="text-2xl">✕</span>;
-const Sun = () => <span className="text-2xl">☀️</span>;
-const Moon = () => <span className="text-2xl">🌙</span>;
-const ChevronDown = () => <span className="text-xs">▾</span>;
-const Search = () => <span className="text-2xl">🔍</span>;
-const User = () => <span className="text-2xl">👤</span>;
-const ShoppingCart = () => <span className="text-2xl">🛒</span>;
+// Properly typed icon components that accept className and other props
+const Menu: FC<{ className?: string }> = ({ className }) => (
+  <span className={`text-2xl ${className || ''}`}>☰</span>
+);
+const X: FC<{ className?: string }> = ({ className }) => (
+  <span className={`text-2xl ${className || ''}`}>✕</span>
+);
+const Sun: FC<{ className?: string }> = ({ className }) => (
+  <span className={`text-2xl ${className || ''}`}>☀️</span>
+);
+const Moon: FC<{ className?: string }> = ({ className }) => (
+  <span className={`text-2xl ${className || ''}`}>🌙</span>
+);
+const ChevronDown: FC<{ className?: string }> = ({ className }) => (
+  <span className={`text-xs ${className || ''}`}>▾</span>
+);
+const Search: FC<{ className?: string }> = ({ className }) => (
+  <span className={`text-2xl ${className || ''}`}>🔍</span>
+);
+const User: FC<{ className?: string }> = ({ className }) => (
+  <span className={`text-2xl ${className || ''}`}>👤</span>
+);
+const ShoppingCart: FC<{ className?: string }> = ({ className }) => (
+  <span className={`text-2xl ${className || ''}`}>🛒</span>
+);
 
 export default function Navbar() {
   const { theme, toggleTheme } = useTheme();
@@ -204,7 +220,7 @@ export default function Navbar() {
                   href="/donate" 
                   className="flex items-center px-5 py-2.5 bg-gradient-to-r from-primary to-accent text-white rounded-xl hover:from-primary-dark hover:to-accent-dark transition-all-premium transform hover:-translate-y-1"
                 >
-                  <ShoppingCart className="w-5 h-5 mr-2" />
+                  <ShoppingCart className="w-5 h-5 mr-2) />
                   Donate Now
                 </Link>
               </div>

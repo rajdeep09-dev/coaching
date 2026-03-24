@@ -2,16 +2,41 @@
 
 import Link from 'next/link';
 import { useTheme } from '@/src/lib/theme-provider';
+import type { FC } from 'react';
 
-// Reactive placeholders for social media icons
-const Facebook = () => <span className="text-2xl">f</span>;
-const Twitter = () => <span className="text-2xl">🐦</span>;
-const Instagram = () => <span className="text-2xl">📷</span>;
-const LinkedIn = () => <span className="text-2xl">in</span>;
-const Youtube = () => <span className="text-2xl">▶️</span>;
-const MapPin = () => <span className="text-2xl">📍</span>;
-const Phone = () => <span className="text-2xl">📞</span>;
-const Mail = () => <span className="text-2xl">📧</span>;
+// Properly typed icon components that accept className and other props
+const Facebook: FC<{ className?: string }> = ({ className }) => (
+  <span className={`text-2xl ${className || ''}`}>f</span>
+);
+const Twitter: FC<{ className?: string }> = ({ className }) => (
+  <span className={`text-2xl ${className || ''}`}>🐦</span>
+);
+const Instagram: FC<{ className?: string }> = ({ className }) => (
+  <span className={`text-2xl ${className || ''}`}>📷</span>
+);
+const LinkedIn: FC<{ className?: string }> = ({ className }) => (
+  <span className={`text-2xl ${className || ''}`}>in</span>
+);
+const Youtube: FC<{ className?: string }> = ({ className }) => (
+  <span className={`text-2xl ${className || ''}`}>▶️</span>
+);
+const MapPin: FC<{ className?: string }> = ({ className }) => (
+  <span className={`text-2xl ${className || ''}`}>📍</span>
+);
+const Phone: FC<{ className?: string }> = ({ className }) => (
+  <span className={`text-2xl ${className || ''}`}>📞</span>
+);
+const Mail: FC<{ className?: string }> = ({ className }) => (
+  <span className={`text-2xl ${className || ''}`}>📧</span>
+);
+
+// Sun and Moon for theme toggle
+const Sun: FC<{ className?: string }> = ({ className }) => (
+  <span className={`text-2xl ${className || ''}`}>☀️</span>
+);
+const Moon: FC<{ className?: string }> = ({ className }) => (
+  <span className={`text-2xl ${className || ''}`}>🌙</span>
+);
 
 export default function Footer() {
   const { theme, toggleTheme } = useTheme();

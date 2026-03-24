@@ -220,7 +220,7 @@ export default function Navbar() {
                   href="/donate" 
                   className="flex items-center px-5 py-2.5 bg-gradient-to-r from-primary to-accent text-white rounded-xl hover:from-primary-dark hover:to-accent-dark transition-all-premium transform hover:-translate-y-1"
                 >
-                  <ShoppingCart className="w-5 h-5 mr-2) />
+                  <ShoppingCart className="w-5 h-5 mr-2" />
                   Donate Now
                 </Link>
               </div>

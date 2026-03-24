@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex Coaching | Transform Your Potential</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'display': ['Playfair Display', 'serif'],
+                        'body': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'luxury': {
+                            900: '#0a0a0b',
+                            800: '#121214',
+                            700: '#1a1a1d',
+                            600: '#232327',
+                            gold: '#d4af37',
+                            'gold-light': '#e5c158',
+                            'gold-dark': '#b8960c',
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'spin-slow': 'spin 20s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            margin: 0;
+            padding: 0;
+            background-color: #0a0a0b;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #d4af37 0%, #e5c158 50%, #d4af37 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .glass-card {
+            background: rgba(26, 26, 29, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+        
+        .glow-border {
+            position: relative;
+        }
+        
+        .glow-border::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(135deg, #d4af37, transparent, #d4af37);
+            border-radius: inherit;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .glow-border:hover::before {
+            opacity: 1;
+        }
+        
+        .magnetic-btn {
+            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .text-reveal {
+            overflow: hidden;
+        }
+        
+        .text-reveal span {
+            display: inline-block;
+            transform: translateY(100%);
+        }
+        
+        .cursor-glow {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 0;
+            transform: translate(-50%, -50%);
+        }
+        
+        .noise-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 1;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+        
+        .scroll-indicator {
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        
+        .service-card {
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+        
+        .testimonial-card {
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .testimonial-card.active {
+            transform: scale(1.05);
+            opacity: 1;
+        }
+        
+        .testimonial-card.inactive {
+            transform: scale(0.9);
+            opacity: 0.5;
+        }
+        
+        .pricing-card {
+            transition: all 0.4s ease;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .pricing-card.featured {
+            border-color: #d4af37;
+        }
+        
+        .input-field {
+            background: transparent;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .input-field:focus {
+            border-color: #d4af37;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+            outline: none;
+        }
+        
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.4;
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #d4af37, #e5c158);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .stat-number {
+            font-variant-numeric: tabular-nums;
+        }
+    </style>
+</head>
+<body class="font-body antialiased">
+    <!-- Noise Overlay -->
+    <div class="noise-bg"></div>
+    
+    <!-- Cursor Glow -->
+    <div class="cursor-glow" id="cursorGlow"></div>
+    
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 opacity-0 -translate-y-full">
+        <div class="glass-card mx-4 mt-4 rounded-2xl px-6 py-4">
+            <div class="flex items-center justify-between max-w-7xl mx-auto">
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-luxury-gold to-luxury-gold-dark flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i data-lucide="crown" class="w-5 h-5 text-luxury-900"></i>
+                    </div>
+                    <span class="font-display text-xl font-semibold gradient-text">Apex</span>
+                </a>
+                
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#about" class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors">About</a>
+                    <a href="#services" class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors">Services</a>
+                    <a href="#testimonials" class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors">Success Stories</a>
+                    <a href="#pricing" class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors">Investment</a>
+                </div>
+                
+                <a href="#contact" class="magnetic-btn px-6 py-2.5 rounded-full bg-gradient-to-r from-luxury-gold to-luxury-gold-dark text-luxury-900 font-semibold text-sm hover:shadow-lg hover:shadow-luxury-gold/20 transition-all">
+                    Book Consultation
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <!-- Animated Orbs -->
+        <div class="orb w-96 h-96 bg-luxury-gold top-20 -left-48 animate-float"></div>
+        <div class="orb w-80 h-80 bg-purple-600 bottom-20 -right-40 animate-float" style="animation-delay: -3s;"></div>
+        <div class="orb w-64 h-64 bg-blue-600 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" style="animation: pulse-slow 4s infinite;"></div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-6 text-center">
+            <div class="hero-badge inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card mb-8 opacity-0">
+                <span class="w-2 h-2 rounded-full bg-luxury-gold animate-pulse"></span>
+                <span class="text-sm text-gray-300">Elite Performance Coaching</span>
+            </div>
+            
+            <h1 class="hero-title font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-tight mb-6">
+                <span class="block overflow-hidden">
+                    <span class="inline-block">Unlock Your</span>
+                </span>
+                <span class="block overflow-hidden">
+                    <span class="inline-block gradient-text">Infinite Potential</span>
+                </span>
+            </h1>
+            
+            <p class="hero-subtitle text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-10 opacity-0">
+                Transform your mindset, master your craft, and achieve extraordinary results with personalized coaching from industry-leading experts.
+            </p>
+            
+            <div class="hero-cta flex flex-col sm:flex-row items-center justify-center gap-4 opacity-0">
+                <a href="#contact" class="magnetic-btn group px-8 py-4 rounded-full bg-gradient-to-r from-luxury-gold to-luxury-gold-dark text-luxury-900 font-semibold text-lg hover:shadow-xl hover:shadow-luxury-gold/30 transition-all flex items-center gap-2">
+                    Start Your Journey
+                    <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                </a>
+                <a href="#services" class="magnetic-btn px-8 py-4 rounded-full border border-luxury-gold/30 text-white font-medium hover:bg-luxury-gold/10 transition-all">
+                    Explore Services
+                </a>
+            </div>
+            
+            <!-- Stats -->
+            <div class="hero-stats grid grid-cols-3 gap-8 max-w-3xl mx-auto mt-20 opacity-0">
+                <div class="text-center">
+                    <div class="stat-number font-display text-4xl md:text-5xl font-bold gradient-text" data-target="500">0</div>
+                    <div class="text-sm text-gray-500 mt-2">Clients Transformed</div>
+                </div>
+                <div class="text-center">
+                    <div class="stat-number font-display text-4xl md:text-5xl font-bold gradient-text" data-target="98">0</div>
+                    <div class="text-sm text-gray-500 mt-2">% Success Rate</div>
+                </div>
+                <div class="text-center">
+                    <div class="stat-number font-display text-4xl md:text-5xl font-bold gradient-text" data-target="15">0</div>
+                    <div class="text-sm text-gray-500 mt-2">Years Experience</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator absolute bottom-10 left-1/2 -translate-x-1/2 opacity-0">
+            <div class="w-6 h-10 rounded-full border-2 border-luxury-gold/30 flex justify-center pt-2">
+                <div class="w-1.5 h-3 bg-luxury-gold rounded-full animate-bounce"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="relative py-32 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <!-- Image Side -->
+                <div class="about-image relative">
+                    <div class="relative z-10 rounded-3xl overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&h=1000&fit=crop" alt="Coach Portrait" class="w-full h-[600px] object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-luxury-900 via-transparent to-transparent"></div>
+                    </div>
+                    
+                    <!-- Floating Card -->
+                    <div class="absolute -bottom-8 -right-8 glass-card rounded-2xl p-6 z-20 max-w-xs about-float-card">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-luxury-gold/20 flex items-center justify-center">
+                                <i data-lucide="award" class="w-6 h-6 text-luxury-gold"></i>
+                            </div>
+                            <div>
+                                <div class="font-display text-lg font-semibold">Top 1% Coach</div>
+                                <div class="text-sm text-gray-400">Globally Recognized</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Decorative Elements -->
+                    <div class="absolute -top-10 -left-10 w-40 h-40 border border-luxury-gold/20 rounded-full about-ring"></div>
+                    <div class="absolute top-1/2 -left-20 w-60 h-60 border border-luxury-gold/10 rounded-full about-ring" style="animation-delay: -2s;"></div>
+                </div>
+                
+                <!-- Content Side -->
+                <div class="about-content">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card mb-6">
+                        <i data-lucide="user" class="w-4 h-4 text-luxury-gold"></i>
+                        <span class="text-sm text-gray-300">About Your Coach</span>
+                    </div>
+                    
+                    <h2 class="font-display text-4xl md:text-5xl font-bold mb-6">
+                        Guiding Leaders to
+                        <span class="gradient-text">Greatness</span>
+                    </h2>
+                    
+                    <p class="text-gray-400 text-lg leading-relaxed mb-6">
+                        With over 15 years of experience coaching C-suite executives, entrepreneurs, and high-performers, I've developed a unique methodology that combines neuroscience, behavioral psychology, and proven business strategies.
+                    </p>
+                    
+                    <p class="text-gray-400 text-lg leading-relaxed mb-8">
+                        My approach isn't about quick fixes—it's about fundamental transformation. Together, we'll dismantle limiting beliefs, install powerful new patterns, and build the mental frameworks required for sustained excellence.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-6 mb-8">
+                        <div class="flex items-start gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-luxury-gold/10 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="brain" class="w-5 h-5 text-luxury-gold"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold mb-1">Neuroscience-Based</div>
+                                <div class="text-sm text-gray-500">Evidence-backed methods</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-luxury-gold/10 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="target" class="w-5 h-5 text-luxury-gold"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold mb-1">Results-Driven</div>
+                                <div class="text-sm text-gray-500">Measurable outcomes</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-luxury-gold/10 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="heart-handshake" class="w-5 h-5 text-luxury-gold"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold mb-1">Holistic Approach</div>
+                                <div class="text-sm text-gray-500">Mind, body & business</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-luxury-gold/10 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="shield-check" class="w-5 h-5 text-luxury-gold"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold mb-1">100% Confidential</div>
+                                <div class="text-sm text-gray-500">Private & secure</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="#contact" class="inline-flex items-center gap-2 text-luxury-gold hover:text-luxury-gold-light transition-colors group">
+                        <span class="font-semibold">Let's Work Together</span>
+                        <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-2 transition-transform"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="relative py-32 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <!-- Header -->
+            <div class="text-center max-w-3xl mx-auto mb-20">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card mb-6">
+                    <i data-lucide="sparkles" class="w-4 h-4 text-luxury-gold"></i>
+                    <span class="text-sm text-gray-300">Our Services</span>
+                </div>
+                <h2 class="font-display text-4xl md:text-5xl font-bold mb-6">
+                    Tailored Coaching For
+                    <span class="gradient-text">Every Ambition</span>
+                </h2>
+                <p class="text-gray-400 text-lg">
+                    Whether you're scaling a business, transitioning careers, or seeking personal breakthroughs, our specialized programs deliver transformative results.
+                </p>
+            </div>
+            
+            <!-- Services Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="service-card glass-card rounded-3xl p-8 glow-border group hover:border-luxury-gold/30 transition-all">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-luxury-gold/20 to-luxury-gold/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="briefcase" class="w-8 h-8 text-luxury-gold"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-semibold mb-4">Executive Coaching</h3>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Strategic leadership development for C-suite executives and senior leaders. Master decision-making, team dynamics, and organizational transformation.
+                    </p>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center gap-3 text-sm text-gray-300">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-luxury-gold flex-shrink-0"></i>
+                            1:1 Private Sessions
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-gray-300">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-luxury-gold flex-shrink-0"></i>
+                            Leadership Assessment
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-gray-300">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-luxury-gold flex-shrink-0"></i>
+                            24/7 Support Access
+                        </li>
+                    </ul>
+                    <a href="#contact" class="inline-flex items-center gap-2 text-luxury-gold font-medium group/link">
+                        Learn More 
+                        <i data-lucide="arrow-up-right" class="w-4 h-4 group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-transform"></i>
+                    </a>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="service-card glass-card rounded-3xl p-8 glow-border group hover:border-luxury-gold/30 transition-all">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500/20 to-purple-500/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="rocket" class="w-8 h-8 text-purple-400"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-semibold mb-4">Entrepreneur Mentorship</h3>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Scale your startup from idea to empire. Get guidance on fundraising, product-market fit, team building, and sustainable growth strategies.
+                    </p>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center gap-3 text-sm text-gray-300">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-luxury-gold flex-shrink-0"></i>
+                            Growth Strategy
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-gray-300">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-luxury-gold flex-shrink-0"></i>
+                            Investor Prep
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-gray-300">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-luxury-gold flex-shrink-0"></i>
+                            Network Access
+                        </li>
+                    </ul>
+                    <a href="#contact" class="inline-flex items-center gap-2 text-luxury-gold font-medium group/link">
+                        Learn More 
+                        <i data-lucide="arrow-up-right" class="w-4 h-4 group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-transform"></i>
+                    </a>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="service-card glass-card rounded-3xl p-8 glow-border group hover:border-luxury-gold/30 transition-all">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500/20 to-blue-500/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="brain-circuit" class="w-8 h-8 text-blue-400"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-semibold mb-4">Mindset Mastery</h3>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Break through mental barriers and install high-performance habits. Rewire your brain for confidence, resilience, and unstoppable momentum.
+                    </p>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center gap-3 text-sm text-gray-300">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-luxury-gold flex-shrink-0"></i>
+                            Neuroplasticity Training
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-gray-300">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-luxury-gold flex-shrink-0"></i>
+                            Habit Architecture
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-gray-300">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-luxury-gold flex-shrink-0"></i>
+                            Stress Management
+                        </li>
+                    </ul>
+                    <a href="#contact" class="inline-flex items-center gap-2 text-luxury-gold font-medium group/link">
+                        Learn More 
+                        <i data-lucide="arrow-up-right" class="w-4 h-4 group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-transform"></i>
+                    </a>
+                </div>
+                
+                <!-- Service 4 -->
+                <div class="service-card glass-card rounded-3xl p-8 glow-border group hover:border-luxury-gold/30 transition-all">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-emerald-500/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="users" class="w-8 h-8 text-emerald-400"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-semibold mb-4">Team Performance</h3>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Transform your team's dynamics and output. Build high-performing cultures, improve communication, and align everyone toward ambitious goals.
+                    </p>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center gap-3 text-sm text-gray-300">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-luxury-gold flex-shrink-0"></i>
+                            Team Workshops
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-gray-300">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-luxury-gold flex-shrink-0"></i>
+                            Culture Design
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-gray-300">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-luxury-gold flex-shrink-0"></i>
+                            Conflict Resolution
+                        </li>
+                    </ul>
+                    <a href="#contact" class="inline-flex items-center gap-2 text-luxury-gold font-medium group/link">
+                        Learn More 
+                        <i data-lucide="arrow-up-right" class="w-4 h-4 group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-transform"></i>
+                    </a>
+                </div>
+                
+                <!-- Service 5 -->
+                <div class="service-card glass-card rounded-3xl p-8 glow-border group hover:border-luxury-gold/30 transition-all">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-rose-500/20 to-rose-500/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="heart-pulse" class="w-8 h-8 text-rose-400"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-semibold mb-4">Life Balance</h3>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Achieve harmony between ambition and wellbeing. Design a lifestyle that supports sustained high performance without burnout.
+                    </p>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center gap-3 text-sm text-gray-300">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-luxury-gold flex-shrink-0"></i>
+                            Energy Management
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-gray-300">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-luxury-gold flex-shrink-0"></i>
+                            Relationship Optimization
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-gray-300">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-luxury-gold flex-shrink-0"></i>
+                            Wellness Integration
+                        </li>
+                    </ul>
+                    <a href="#contact" class="inline-flex items-center gap-2 text-luxury-gold font-medium group/link">
+                        Learn More 
+                        <i data-lucide="arrow-up-right" class="w-4 h-4 group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-transform"></i>
+                    </a>
+                </div>
+                
+                <!-- Service 6 -->
+                <div class="service-card glass-card rounded-3xl p-8 glow-border group hover:border-luxury-gold/30 transition-all">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-500/20 to-amber-500/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="zap" class="w-8 h-8 text-amber-400"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-semibold mb-4">Intensive Retreats</h3>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Immersive 3-day experiences for rapid transformation. Disconnect from distractions and achieve months of progress in a single weekend.
+                    </p>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center gap-3 text-sm text-gray-300">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-luxury-gold flex-shrink-0"></i>
+                            Luxury Accommodations
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-gray-300">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-luxury-gold flex-shrink-0"></i>
+                            Deep-Dive Sessions
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-gray-300">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-luxury-gold flex-shrink-0"></i>
+                            Mastermind Access
+                        </li>
+                    </ul>
+                    <a href="#contact" class="inline-flex items-center gap-2 text-luxury-gold font-medium group/link">
+                        Learn More 
+                        <i data-lucide="arrow-up-right" class="w-4 h-4 group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-transform"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="relative py-32 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <!-- Header -->
+            <div class="text-center max-w-3xl mx-auto mb-20">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card mb-6">
+                    <i data-lucide="quote" class="w-4 h-4 text-luxury-gold"></i>
+                    <span class="text-sm text-gray-300">Success Stories</span>
+                </div>
+                <h2 class="font-display text-4xl md:text-5xl font-bold mb-6">
+                    Clients Who
+                    <span class="gradient-text">Transformed</span>
+                </h2>
+                <p class="text-gray-400 text-lg">
+                    Real results from real clients. Here's what happens when you commit to your growth.
+                </p>
+            </div>
+            
+            <!-- Testimonials Slider -->
+            <div class="relative">
+                <div class="testimonial-container flex gap-6 overflow-x-auto snap-x snap-mandatory pb-8 scrollbar-hide" style="scroll-behavior: smooth; -ms-overflow-style: none; scrollbar-width: none;">
+                    <!-- Testimonial 1 -->
+                    <div class="testimonial-card glass-card rounded-3xl p-8 min-w-[400px] md:min-w-[500px] snap-center flex-shrink-0">
+                        <div class="flex items-center gap-1 mb-6">
+                            <i data-lucide="star" class="w-5 h-5 text-luxury-gold fill-luxury-gold"></i>
+                            <i data-lucide="star" class="w-5 h-5 text-luxury-gold fill-luxury-gold"></i>
+                            <i data-lucide="star" class="w-5 h-5 text-luxury-gold fill-luxury-gold"></i>
+                            <i data-lucide="star" class="w-5 h-5 text-luxury-gold fill-luxury-gold"></i>
+                            <i data-lucide="star" class="w-5 h-5 text-luxury-gold fill-luxury-gold"></i>
+                        </div>
+                        <p class="text-lg text-gray-300 leading-relaxed mb-8">
+                            "Working with Apex was the single best investment I've ever made in myself. Within 6 months, I went from struggling with imposter syndrome to confidently leading a $50M division. The ROI has been incredible."
+                        </p>
+                        <div class="flex items-center gap-4">
+                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&h=100&fit=crop&crop=face" alt="Sarah Chen" class="w-14 h-14 rounded-full object-cover">
+                            <div>
+                                <div class="font-semibold">Sarah Chen</div>
+                                <div class="text-sm text-gray-500">VP of Operations, TechCorp</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Testimonial 2 -->
+                    <div class="testimonial-card glass-card rounded-3xl p-8 min-w-[400px] md:min-w-[500px] snap-center flex-shrink-0">
+                        <div class="flex items-center gap-1 mb-6">
+                            <i data-lucide="star" class="w-5 h-5 text-luxury-gold fill-luxury-gold"></i>
+                            <i data-lucide="star" class="w-5 h-5 text-luxury-gold fill-luxury-gold"></i>
+                            <i data-lucide="star" class="w-5 h-5 text-luxury-gold fill-luxury-gold"></i>
+                            <i data-lucide="star" class="w-5 h-5 text-luxury-gold fill-luxury-gold"></i>
+                            <i data-lucide="star" class="w-5 h-5 text-luxury-gold fill-luxury-gold"></i>
+                        </div>
+                        <p class="text-lg text-gray-300 leading-relaxed mb-8">
+                            "I was skeptical about coaching at first, but the results speak for themselves. My startup went from pre-revenue to $2M ARR in 18 months. The strategic guidance and mindset shifts were game-changers."
+                        </p>
+                        <div class="flex items-center gap-4">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face" alt="Marcus Johnson" class="w-14 h-14 rounded-full object-cover">
+                            <div>
+                                <div class="font-semibold">Marcus Johnson</div>
+                                <div class="text-sm text-gray-500">Founder & CEO, Nexus AI</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Testimonial 3 -->
+                    <div class="testimonial-card glass-card rounded-3xl p-8 min-w-[400px] md:min-w-[500px] snap-center flex-shrink-0">
+                        <div class="flex items-center gap-1 mb-6">
+                            <i data-lucide="star" class="w-5 h-5 text-luxury-gold fill-luxury-gold"></i>
+                            <i data-lucide="star" class="w-5 h-5 text-luxury-gold fill-luxury-gold"></i>
+                            <i data-lucide="star" class="w-5 h-5 text-luxury-gold fill-luxury-gold"></i>
+                            <i data-lucide="star" class="w-5 h-5 text-luxury-gold fill-luxury-gold"></i>
+                            <i data-lucide="star" class="w-5 h-5 text-luxury-gold fill-luxury-gold"></i>
+                        </div>
+                        <p class="text-lg text-gray-300 leading-relaxed mb-8">
+                            "The intensive retreat was transformative. I came in feeling burned out and directionless, and left with crystal clarity and a renewed sense of purpose. Six months later, I've doubled my income and halved my work hours."
+                        </p>
+                        <div class="flex items-center gap-4">
+                            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&h=100&fit=crop&crop=face" alt="Emily Rodriguez" class="w-14 h-14 rounded-full object-cover">
+                            <div>
+                                <div class="font-semibold">Emily Rodriguez</div>
+                                <div class="text-sm text-gray-500">Creative Director, Artisan Agency</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Testimonial 4 -->
+                    <div class="testimonial-card glass-card rounded-3xl p-8 min-w-[400px] md:min-w-[500px] snap-center flex-shrink-0">
+                        <div class="flex items-center gap-1 mb-6">
+                            <i data-lucide="star" class="w-5 h-5 text-luxury-gold fill-luxury-gold"></i>
+                            <i data-lucide="star" class="w-5 h-5 text-luxury-gold fill-luxury-gold"></i>
+                            <i data-lucide="star" class="w-5 h-5 text-luxury-gold fill-luxury-gold"></i>
+                            <i data-lucide="star" class="w-5 h-5 text-luxury-gold fill-luxury-gold"></i>
+                            <i data-lucide="star" class="w-5 h-5 text-luxury-gold fill-luxury-gold"></i>
+                        </div>
+                        <p class="text-lg text-gray-300 leading-relaxed mb-8">
+                            "Our executive team was struggling with alignment and communication. The team performance program completely transformed our dynamics. We're now operating as a unified force and crushing our targets."
+                        </p>
+                        <div class="flex items-center gap-4">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face" alt="David Park" class="w-14 h-14 rounded-full object-cover">
+                            <div>
+                                <div class="font-semibold">David Park</div>
+                                <div class="text-sm text-gray-500">COO, Velocity Ventures</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Navigation Arrows -->
+                <button class="testimonial-prev absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 w-12 h-12 rounded-full glass-card flex items-center justify-center hover:bg-luxury-gold/20 transition-colors hidden md:flex">
+                    <i data-lucide="chevron-left" class="w-6 h-6"></i>
+                </button>
+                <button class="testimonial-next absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 w-12 h-12 rounded-full glass-card flex items-center justify-center hover:bg-luxury-gold/20 transition-colors hidden md:flex">
+                    <i data-lucide="chevron-right" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="relative py-32 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <!-- Header -->
+            <div class="text-center max-w-3xl mx-auto mb-20">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card mb-6">
+                    <i data-lucide="gem" class="w-4 h-4 text-luxury-gold"></i>
+                    <span class="text-sm text-gray-300">Investment</span>
+                </div>
+                <h2 class="font-display text-4xl md:text-5xl font-bold mb-6">
+                    Choose Your Path to
+                    <span class="gradient-text">Excellence</span>
+                </h2>
+                <p class="text-gray-400 text-lg">
+                    Transparent pricing for transformational results. Every program is designed to deliver 10x returns on your investment.
+                </p>
+            </div>
+            
+            <!-- Pricing Cards -->
+            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Starter -->
+                <div class="pricing-card glass-card rounded-3xl p-8 border border-luxury-600">
+                    <div class="mb-8">
+                        <h3 class="font-display text-2xl font-semibold mb-2">Essential</h3>
+                        <p class="text-gray-400 text-sm">Perfect for getting started</p>
+                    </div>
+                    <div class="mb-8">
+                        <span class="font-display text-5xl font-bold">$2,500</span>
+                        <span class="text-gray-400">/month</span>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <i data-lucide="check" class="w-5 h-5 text-luxury-gold"></i>
+                            2 Private Sessions/Month
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <i data-lucide="check" class="w-5 h-5 text-luxury-gold"></i>
+                            Email Support
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <i data-lucide="check" class="w-5 h-5 text-luxury-gold"></i>
+                            Goal Setting Framework
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <i data-lucide="check" class="w-5 h-5 text-luxury-gold"></i>
+                            Progress Tracking
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-500">
+                            <i data-lucide="x" class="w-5 h-5"></i>
+                            24/7 Chat Access
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-500">
+                            <i data-lucide="x" class="w-5 h-5"></i>
+                            Custom Resources
+                        </li>
+                    </ul>
+                    <button class="w-full py-4 rounded-full border border-luxury-gold/30 text-white font-semibold hover:bg-luxury-gold/10 transition-all">
+                        Get Started
+                    </button>
+                </div>
+                
+                <!-- Professional (Featured) -->
+                <div class="pricing-card featured glass-card rounded-3xl p-8 border-2 relative">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-luxury-gold text-luxury-900 text-sm font-semibold">
+                        Most Popular
+                    </div>
+                    <div class="mb-8">
+                        <h3 class="font-display text-2xl font-semibold mb-2">Professional</h3>
+                        <p class="text-gray-400 text-sm">For serious transformation</p>
+                    </div>
+                    <div class="mb-8">
+                        <span class="font-display text-5xl font-bold gradient-text">$5,000</span>
+                        <span class="text-gray-400">/month</span>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <i data-lucide="check" class="w-5 h-5 text-luxury-gold"></i>
+                            4 Private Sessions/Month
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <i data-lucide="check" class="w-5 h-5 text-luxury-gold"></i>
+                            Priority Email & Chat
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <i data-lucide="check" class="w-5 h-5 text-luxury-gold"></i>
+                            Comprehensive Assessment
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <i data-lucide="check" class="w-5 h-5 text-luxury-gold"></i>
+                            Custom Action Plans
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <i data-lucide="check" class="w-5 h-5 text-luxury-gold"></i>
+                            24/7 Chat Access
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <i data-lucide="check" class="w-5 h-5 text-luxury-gold"></i>
+                            Resource Library
+                        </li>
+                    </ul>
+                    <button class="w-full py-4 rounded-full bg-gradient-to-r from-luxury-gold to-luxury-gold-dark text-luxury-900 font-semibold hover:shadow-lg hover:shadow-luxury-gold/30 transition-all">
+                        Get Started
+                    </button>
+                </div>
+                
+                <!-- Elite -->
+                <div class="pricing-card glass-card rounded-3xl p-8 border border-luxury-600">
+                    <div class="mb-8">
+                        <h3 class="font-display text-2xl font-semibold mb-2">Elite</h3>
+                        <p class="text-gray-400 text-sm">White-glove experience</p>
+                    </div>
+                    <div class="mb-8">
+                        <span class="font-display text-5xl font-bold">$10,000</span>
+                        <span class="text-gray-400">/month</span>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <i data-lucide="check" class="w-5 h-5 text-luxury-gold"></i>
+                            Unlimited Sessions
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <i data-lucide="check" class="w-5 h-5 text-luxury-gold"></i>
+                            24/7 Direct Access
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <i data-lucide="check" class="w-5 h-5 text-luxury-gold"></i>
+                            Quarterly Retreats
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <i data-lucide="check" class="w-5 h-5 text-luxury-gold"></i>
+                            Team Sessions Included
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <i data-lucide="check" class="w-5 h-5 text-luxury-gold"></i>
+                            Exclusive Network Access
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <i data-lucide="check" class="w-5 h-5 text-luxury-gold"></i>
+                            Custom Everything
+                        </li>
+                    </ul>
+                    <button class="w-full py-4 rounded-full border border-luxury-gold/30 text-white font-semibold hover:bg-luxury-gold/10 transition-all">
+                        Get Started
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Guarantee -->
+            <div class="text-center mt-12">
+                <div class="inline-flex items-center gap-3 glass-card rounded-full px-6 py-3">
+                    <i data-lucide="shield-check" class="w-5 h-5 text-luxury-gold"></i>
+                    <span class="text-sm text-gray-300">30-Day Money-Back Guarantee. No questions asked.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="relative py-32 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-16">
+                <!-- Content Side -->
+                <div class="contact-content">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card mb-6">
+                        <i data-lucide="mail" class="w-4 h-4 text-luxury-gold"></i>
+                        <span class="text-sm text-gray-300">Get In Touch</span>
+                    </div>
+                    
+                    <h2 class="font-display text-4xl md:text-5xl font-bold mb-6">
+                        Ready to Unlock Your
+                        <span class="gradient-text">Potential?</span>
+                    </h2>
+                    
+                    <p class="text-gray-400 text-lg leading-relaxed mb-8">
+                        Take the first step toward extraordinary results. Book a complimentary discovery call to discuss your goals and see if we're the right fit.
+                    </p>
+                    
+                    <div class="space-y-6 mb-12">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-luxury-gold/10 flex items-center justify-center">
+                                <i data-lucide="calendar" class="w-6 h-6 text-luxury-gold"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold">Free Discovery Call</div>
+                                <div class="text-sm text-gray-500">30 minutes, zero obligation</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-luxury-gold/10 flex items-center justify-center">
+                                <i data-lucide="lock" class="w-6 h-6 text-luxury-gold"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold">100% Confidential</div>
+                                <div class="text-sm text-gray-500">Your privacy is sacred</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-luxury-gold/10 flex items-center justify-center">
+                                <i data-lucide="clock" class="w-6 h-6 text-luxury-gold"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold">Limited Availability</div>
+                                <div class="text-sm text-gray-500">Only 5 new clients per month</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Social Links -->
+                    <div class="flex gap-4">
+                        <a href="#" class="w-12 h-12 rounded-full glass-card flex items-center justify-center hover:bg-luxury-gold/20 transition-colors">
+                            <i data-lucide="linkedin" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 rounded-full glass-card flex items-center justify-center hover:bg-luxury-gold/20 transition-colors">
+                            <i data-lucide="instagram" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 rounded-full glass-card flex items-center justify-center hover:bg-luxury-gold/20 transition-colors">
+                            <i data-lucide="twitter" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 rounded-full glass-card flex items-center justify-center hover:bg-luxury-gold/20 transition-colors">
+                            <i data-lucide="youtube" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Form Side -->
+                <div class="contact-form">
+                    <form class="glass-card rounded-3xl p-8 space-y-6">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">First Name</label>
+                                <input type="text" class="input-field w-full px-4 py-3 rounded-xl text-white placeholder-gray-500" placeholder="John">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Last Name</label>
+                                <input type="text" class="input-field w-full px-4 py-3 rounded-xl text-white placeholder-gray-500" placeholder="Doe">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Email</label>
+                            <input type="email" class="input-field w-full px-4 py-3 rounded-xl text-white placeholder-gray-500" placeholder="john@example.com">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Phone</label>
+                            <input type="tel" class="input-field w-full px-4 py-3 rounded-xl text-white placeholder-gray-500" placeholder="+1 (555) 000-0000">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Service Interest</label>
+                            <select class="input-field w-full px-4 py-3 rounded-xl text-white bg-transparent">
+                                <option value="" class="bg-luxury-800">Select a service</option>
+                                <option value="executive" class="bg-luxury-800">Executive Coaching</option>
+                                <option value="entrepreneur" class="bg-luxury-800">Entrepreneur Mentorship</option>
+                                <option value="mindset" class="bg-luxury-800">Mindset Mastery</option>
+                                <option value="team" class="bg-luxury-800">Team Performance</option>
+                                <option value="life" class="bg-luxury-800">Life Balance</option>
+                                <option value="retreat" class="bg-luxury-800">Intensive Retreat</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Tell Us About Your Goals</label>
+                            <textarea rows="4" class="input-field w-full px-4 py-3 rounded-xl text-white placeholder-gray-500 resize-none" placeholder="What are you looking to achieve?"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full py-4 rounded-full bg-gradient-to-r from-luxury-gold to-luxury-gold-dark text-luxury-900 font-semibold text-lg hover:shadow-xl hover:shadow-luxury-gold/30 transition-all flex items-center justify-center gap-2 group">
+                            Book Your Discovery Call
+                            <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="relative py-16 border-t border-luxury-700">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-12 mb-12">
+                <!-- Brand -->
+                <div class="md:col-span-2">
+                    <a href="#" class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-luxury-gold to-luxury-gold-dark flex items-center justify-center">
+                            <i data-lucide="crown" class="w-5 h-5 text-luxury-900"></i>
+                        </div>
+                        <span class="font-display text-2xl font-semibold gradient-text">Apex</span>
+                    </a>
+                    <p class="text-gray-400 max-w-md mb-6">
+                        Empowering high-performers to achieve extraordinary results through personalized coaching, proven methodologies, and unwavering support.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full glass-card flex items-center justify-center hover:bg-luxury-gold/20 transition-colors">
+                            <i data-lucide="linkedin" class="w-4 h-4"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full glass-card flex items-center justify-center hover:bg-luxury-gold/20 transition-colors">
+                            <i data-lucide="instagram" class="w-4 h-4"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full glass-card flex items-center justify-center hover:bg-luxury-gold/20 transition-colors">
+                            <i data-lucide="twitter" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#about" class="text-gray-400 hover:text-luxury-gold transition-colors">About</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-luxury-gold transition-colors">Services</a></li>
+                        <li><a href="#testimonials" class="text-gray-400 hover:text-luxury-gold transition-colors">Success Stories</a></li>
+                        <li><a href="#pricing" class="text-gray-400 hover:text-luxury-gold transition-colors">Pricing</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-luxury-gold transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Services -->
+                <div>
+                    <h4 class="font-semibold mb-4">Services</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#services" class="text-gray-400 hover:text-luxury-gold transition-colors">Executive Coaching</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-luxury-gold transition-colors">Entrepreneur Mentorship</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-luxury-gold transition-colors">Mindset Mastery</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-luxury-gold transition-colors">Team Performance</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-luxury-gold transition-colors">Intensive Retreats</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Bottom Bar -->
+            <div class="pt-8 border-t border-luxury-700 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-500 text-sm">
+                    © 2025 Apex Coaching. All rights reserved.
+                </p>
+                <div class="flex gap-6">
+                    <a href="#" class="text-gray-500 text-sm hover:text-luxury-gold transition-colors">Privacy Policy</a>
+                    <a href="#" class="text-gray-500 text-sm hover:text-luxury-gold transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+        
+        // Register GSAP ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
+        
+        // Cursor Glow Effect
+        const cursorGlow = document.getElementById('cursorGlow');
+        let mouseX = 0, mouseY = 0;
+        let glowX = 0, glowY = 0;
+        
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        }, { passive: true });
+        
+        function animateGlow() {
+            glowX += (mouseX - glowX) * 0.1;
+            glowY += (mouseY - glowY) * 0.1;
+            cursorGlow.style.left = glowX + 'px';
+            cursorGlow.style.top = glowY + 'px';
+            requestAnimationFrame(animateGlow);
+        }
+        animateGlow();
+        
+        // Navbar Animation
+        const navbar = document.getElementById('navbar');
+        let lastScroll = 0;
+        
+        gsap.to(navbar, {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            delay: 1,
+            ease: 'power3.out'
+        });
+        
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            if (currentScroll > 100) {
+                navbar.classList.add('shadow-lg');
+            } else {
+                navbar.classList.remove('shadow-lg');
+            }
+            lastScroll = currentScroll;
+        }, { passive: true });
+        
+        // Hero Animations
+        const heroTimeline = gsap.timeline({ defaults: { ease: 'power3.out' } });
+        
+        heroTimeline
+            .to('.hero-badge', { opacity: 1, y: 0, duration: 0.8, delay: 0.3 })
+            .to('.hero-title span span', { y: 0, duration: 1, stagger: 0.1 }, '-=0.4')
+            .to('.hero-subtitle', { opacity: 1, y: 0, duration: 0.8 }, '-=0.6')
+            .to('.hero-cta', { opacity: 1, y: 0, duration: 0.8 }, '-=0.4')
+            .to('.hero-stats', { opacity: 1, y: 0, duration: 0.8 }, '-=0.4')
+            .to('.scroll-indicator', { opacity: 1, duration: 0.8 }, '-=0.4');
+        
+        // Stat Counter Animation
+        const statNumbers = document.querySelectorAll('.stat-number');
+        statNumbers.forEach(stat => {
+            const target = parseInt(stat.dataset.target);
+            gsap.to(stat, {
+                innerHTML: target,
+                duration: 2,
+                delay: 1.5,
+                snap: { innerHTML: 1 },
+                ease: 'power2.out'
+            });
+        });
+        
+        // About Section Animations
+        gsap.from('.about-image', {
+            scrollTrigger: {
+                trigger: '#about',
+                start: 'top 80%',
+                toggleActions: 'play none none reverse'
+            },
+            x: -100,
+            opacity: 0,
+            duration: 1,
+            ease: 'power3.out'
+        });
+        
+        gsap.from('.about-content > *', {
+            scrollTrigger: {
+                trigger: '#about',
+                start: 'top 80%',
+                toggleActions: 'play none none reverse'
+            },
+            y: 50,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.1,
+            ease: 'power3.out'
+        });
+        
+        gsap.from('.about-float-card', {
+            scrollTrigger: {
+                trigger: '#about',
+                start: 'top 60%',
+                toggleActions: 'play none none reverse'
+            },
+            y: 100,
+            opacity: 0,
+            duration: 0.8,
+            delay: 0.5,
+            ease: 'power3.out'
+        });
+        
+        gsap.to('.about-ring', {
+            scrollTrigger: {
+                trigger: '#about',
+                start: 'top 80%',
+                end: 'bottom 20%',
+                scrub: 1
+            },
+            rotation: 360,
+            ease: 'none'
+        });
+        
+        // Services Section Animations
+        gsap.from('#services .inline-flex, #services h2, #services > div > p', {
+            scrollTrigger: {
+                trigger: '#services',
+                start: 'top 80%',
+                toggleActions: 'play none none reverse'
+            },
+            y: 50,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.1,
+            ease: 'power3.out'
+        });
+        
+        gsap.from('.service-card', {
+            scrollTrigger: {
+                trigger: '.service-card',
+                start: 'top 85%',
+                toggleActions: 'play none none reverse'
+            },
+            y: 80,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.1,
+            ease: 'power3.out'
+        });
+        
+        // 3D Tilt Effect on Service Cards
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = (y - centerY) / 20;
+                const rotateY = (centerX - x) / 20;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+            });
+        });
+        
+        // Testimonials Section
+        gsap.from('#testimonials .inline-flex, #testimonials h2, #testimonials > div > p', {
+            scrollTrigger: {
+                trigger: '#testimonials',
+                start: 'top 80%',
+                toggleActions: 'play none none reverse'
+            },
+            y: 50,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.1,
+            ease: 'power3.out'
+        });
+        
+        // Testimonials Slider
+        const testimonialContainer = document.querySelector('.testimonial-container');
+        const prevBtn = document.querySelector('.testimonial-prev');
+        const nextBtn = document.querySelector('.testimonial-next');
+        
+        prevBtn.addEventListener('click', () => {
+            testimonialContainer.scrollBy({ left: -520, behavior: 'smooth' });
+        });
+        
+        nextBtn.addEventListener('click', () => {
+            testimonialContainer.scrollBy({ left: 520, behavior: 'smooth' });
+        });
+        
+        // Pricing Section Animations
+        gsap.from('#pricing .inline-flex, #pricing h2, #pricing > div > p', {
+            scrollTrigger: {
+                trigger: '#pricing',
+                start: 'top 80%',
+                toggleActions: 'play none none reverse'
+            },
+            y: 50,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.1,
+            ease: 'power3.out'
+        });
+        
+        gsap.from('.pricing-card', {
+            scrollTrigger: {
+                trigger: '.pricing-card',
+                start: 'top 85%',
+                toggleActions: 'play none none reverse'
+            },
+            y: 80,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: 'power3.out'
+        });
+        
+        // Contact Section Animations
+        gsap.from('.contact-content > *', {
+            scrollTrigger: {
+                trigger: '#contact',
+                start: 'top 80%',
+                toggleActions: 'play none none reverse'
+            },
+            y: 50,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.1,
+            ease: 'power3.out'
+        });
+        
+        gsap.from('.contact-form', {
+            scrollTrigger: {
+                trigger: '#contact',
+                start: 'top 80%',
+                toggleActions: 'play none none reverse'
+            },
+            x: 100,
+            opacity: 0,
+            duration: 1,
+            delay: 0.3,
+            ease: 'power3.out'
+        });
+        
+        // Magnetic Button Effect
+        document.querySelectorAll('.magnetic-btn').forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                
+                btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+            });
+            
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = 'translate(0, 0)';
+            });
+        });
+        
+        // Form Submit Handler
+        document.querySelector('form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your interest! We\'ll be in touch within 24 hours to schedule your discovery call.');
+        });
+        
+        // Smooth Scroll for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Hide scrollbar for testimonial container
+        const style = document.createElement('style');
+        style.textContent = `
+            .scrollbar-hide::-webkit-scrollbar {
+                display: none;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

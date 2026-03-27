@@ -1,6 +1,10 @@
 # OpenCode Premium UI/UX Configuration 🎨
 
-> **$100,000 Worth of UI/UX Development Power** - A curated MCP setup for building websites like supahero.io
+> **$100,000 Worth of UI/UX Development Power** - Build websites like supahero.io in **5 MINUTES**, not 30!
+
+🎉 **100% FREE AI Models** - No API keys needed for Claude/OpenAI! Use MiniMax 2.5, Nemotron 70B, Kimi K2, and more for FREE!
+
+⚡ **Zero-Error Building** - Stop wasting time debugging. Build complete websites in one shot with parallel MCP execution.
 
 This configuration transforms OpenCode CLI into a powerhouse for creating stunning, premium-quality websites with cutting-edge animations and components.
 

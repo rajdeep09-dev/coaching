@@ -1,19 +1,19 @@
 {
-  "_comment": "OpenCode Configuration for Premium UI/UX Website Development - $100k Worth Setup",
+  "_comment": "OpenCode Configuration - FREE Models + Premium MCPs for Fast Error-Free Building",
   "data": {
     "directory": ".opencode"
   },
   "providers": {
     "openai": {
       "apiKey": "${OPENAI_API_KEY}",
-      "disabled": false
+      "disabled": true
     },
     "anthropic": {
       "apiKey": "${ANTHROPIC_API_KEY}",
-      "disabled": false
+      "disabled": true
     },
     "copilot": {
-      "disabled": false
+      "disabled": true
     },
     "groq": {
       "apiKey": "${GROQ_API_KEY}",
@@ -21,22 +21,22 @@
     },
     "openrouter": {
       "apiKey": "${OPENROUTER_API_KEY}",
-      "disabled": true
+      "disabled": false
     }
   },
   "agents": {
     "coder": {
-      "model": "claude-3.7-sonnet",
-      "maxTokens": 64000,
+      "model": "openrouter/minimax/minimax-01",
+      "maxTokens": 32000,
       "temperature": 0.1
     },
     "task": {
-      "model": "claude-3.7-sonnet",
-      "maxTokens": 64000,
+      "model": "openrouter/nvidia/llama-3.1-nemotron-70b-instruct",
+      "maxTokens": 16000,
       "temperature": 0.2
     },
     "title": {
-      "model": "claude-3.7-sonnet",
+      "model": "openrouter/moonshotai/kimi-k2",
       "maxTokens": 100,
       "temperature": 0.3
     }
@@ -53,56 +53,56 @@
       "env": {
         "API_KEY": "${TWENTY_FIRST_DEV_API_KEY}"
       },
-      "description": "21st.dev Magic MCP - AI-powered UI component generation from natural language descriptions. Like v0 but in your IDE. Supports 20+ layouts, 35+ components, and 19 animations."
+      "description": "21st.dev Magic MCP - AI-powered UI component generation from natural language. Like v0 in your IDE. 20+ layouts, 35+ components, 19 animations."
     },
     "magic-ui": {
       "type": "stdio",
       "command": "npx",
       "args": ["-y", "@magicuidesign/mcp@latest"],
       "env": {},
-      "description": "Magic UI MCP - Official MCP server for Magic UI components. Access blur fade animations, marquee logos, grid backgrounds, and premium animated components."
+      "description": "Magic UI MCP - Blur fade animations, marquee logos, grid backgrounds, premium animated components."
     },
     "aceternity-ui": {
       "type": "stdio",
       "command": "npx",
       "args": ["-y", "aceternityui-mcp@latest"],
       "env": {},
-      "description": "Aceternity UI MCP - Premium animated components with 3D effects, parallax, and cinematic animations. Access the most premium UI components available."
+      "description": "Aceternity UI MCP - Cinematic 3D components with parallax effects and premium animations."
     },
     "shadcn-ui": {
       "type": "stdio",
       "command": "npx",
       "args": ["-y", "@magnusrodseth/shadcn-mcp-server@latest"],
       "env": {},
-      "description": "Shadcn UI MCP - Access 200+ shadcn/ui components and blocks. Provides component search, installation instructions, and code generation."
+      "description": "Shadcn UI MCP - 200+ accessible components. Forms, dialogs, tables, dropdowns."
     },
     "tailwind-css": {
       "type": "stdio",
       "command": "npx",
       "args": ["-y", "@carbonodev/tailwindcss-mcp-server@latest"],
       "env": {},
-      "description": "Tailwind CSS MCP - Utility class documentation, color palette generation, and responsive design assistance."
+      "description": "Tailwind CSS MCP - Utility classes, color palettes, responsive design assistance."
     },
     "motion-dev": {
       "type": "stdio",
       "command": "npx",
       "args": ["-y", "motion-dev-mcp@latest"],
       "env": {},
-      "description": "Motion.dev MCP - Animation code generation for React, JavaScript, and Vue. Production-quality animation components with offline documentation."
+      "description": "Motion.dev MCP - Production-ready animations for React, JavaScript, Vue."
     },
     "framer-motion": {
       "type": "stdio",
       "command": "npx",
       "args": ["-y", "@picardraphael/mcp-server-documentation@latest"],
       "env": {},
-      "description": "Documentation MCP - Unified access to Next.js, Tailwind, Framer Motion docs with intelligent search and code examples."
+      "description": "Documentation MCP - Next.js, Tailwind, Framer Motion docs with intelligent search."
     },
     "rive-animations": {
       "type": "stdio",
       "command": "npx",
       "args": ["-y", "@astralisone/rive-mcp-server@latest"],
       "env": {},
-      "description": "Rive MCP - Interactive animations and micro-interactions. Build lightweight, runtime animations for web."
+      "description": "Rive MCP - Interactive animations and micro-interactions for web."
     }
   },
   "lsp": {
@@ -146,5 +146,11 @@
     "hoverInfo": true,
     "diagnostics": true,
     "formatOnSave": true
+  },
+  "workflow": {
+    "strategy": "parallel-mcps",
+    "maxSimultaneousTools": 8,
+    "errorRecovery": "retry-once",
+    "buildMode": "incremental"
   }
 }

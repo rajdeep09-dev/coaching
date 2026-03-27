@@ -1,0 +1,189 @@
+{
+  "_comment": "Enterprise Next.js Configuration - Supahero.io Level Quality",
+  "data": {
+    "directory": ".opencode"
+  },
+  "providers": {
+    "openai": {
+      "apiKey": "${OPENAI_API_KEY}",
+      "disabled": true
+    },
+    "anthropic": {
+      "apiKey": "${ANTHROPIC_API_KEY}",
+      "disabled": true
+    },
+    "copilot": {
+      "disabled": true
+    },
+    "groq": {
+      "apiKey": "${GROQ_API_KEY}",
+      "disabled": true
+    },
+    "openrouter": {
+      "apiKey": "${OPENROUTER_API_KEY}",
+      "disabled": false
+    }
+  },
+  "agents": {
+    "coder": {
+      "model": "openrouter/nvidia/llama-3.1-nemotron-70b-instruct",
+      "maxTokens": 64000,
+      "temperature": 0.1,
+      "topP": 0.9
+    },
+    "task": {
+      "model": "openrouter/minimax/minimax-01",
+      "maxTokens": 32000,
+      "temperature": 0.15,
+      "topP": 0.95
+    },
+    "title": {
+      "model": "openrouter/moonshotai/kimi-k2",
+      "maxTokens": 100,
+      "temperature": 0.2
+    },
+    "review": {
+      "model": "openrouter/google/gemma-2-27b-it",
+      "maxTokens": 16000,
+      "temperature": 0.1
+    }
+  },
+  "shell": {
+    "path": "/bin/bash",
+    "args": ["-l"]
+  },
+  "mcpServers": {
+    "21st-dev-magic": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@21st-dev/magic@latest"],
+      "env": {
+        "API_KEY": "${TWENTY_FIRST_DEV_API_KEY}"
+      },
+      "description": "AI component generation - 20+ layouts, 35+ components, 19 animations"
+    },
+    "magic-ui": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@magicuidesign/mcp@latest"],
+      "env": {},
+      "description": "Magic UI - Marquees, blur fades, grid backgrounds"
+    },
+    "aceternity-ui": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "aceternityui-mcp@latest"],
+      "env": {},
+      "description": "Aceternity - Cinematic 3D components, parallax, premium animations"
+    },
+    "shadcn-ui": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@magnusrodseth/shadcn-mcp-server@latest"],
+      "env": {},
+      "description": "Shadcn UI - 200+ accessible components"
+    },
+    "tailwind-css": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@carbonodev/tailwindcss-mcp-server@latest"],
+      "env": {},
+      "description": "Tailwind CSS - Utility classes, responsive design"
+    },
+    "motion-dev": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "motion-dev-mcp@latest"],
+      "env": {},
+      "description": "Motion.dev - Production animations"
+    },
+    "framer-motion": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@picardraphael/mcp-server-documentation@latest"],
+      "env": {},
+      "description": "Docs - Next.js, Tailwind, Framer Motion"
+    },
+    "rive-animations": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@astralisone/rive-mcp-server@latest"],
+      "env": {},
+      "description": "Rive - Interactive animations"
+    },
+    "nextjs-helper": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@next/mcp@latest"],
+      "env": {},
+      "description": "Next.js - App router, API routes, middleware"
+    },
+    "react-bits": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@react-bits/mcp@latest"],
+      "env": {},
+      "description": "React Bits - Advanced React patterns, hooks, components"
+    },
+    "typescript-guru": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@ts-mcp/server@latest"],
+      "env": {},
+      "description": "TypeScript - Type generation, interfaces, generics"
+    }
+  },
+  "lsp": {
+    "typescript": {
+      "disabled": false,
+      "command": "typescript-language-server",
+      "args": ["--stdio"]
+    },
+    "tailwindcss": {
+      "disabled": false,
+      "command": "tailwindcss-language-server",
+      "args": ["--stdio"]
+    },
+    "html": {
+      "disabled": false,
+      "command": "html-languageserver",
+      "args": ["--stdio"]
+    },
+    "css": {
+      "disabled": false,
+      "command": "css-languageserver",
+      "args": ["--stdio"]
+    },
+    "json": {
+      "disabled": false,
+      "command": "json-languageserver",
+      "args": ["--stdio"]
+    },
+    "eslint": {
+      "disabled": false,
+      "command": "eslint-lsp",
+      "args": ["--stdio"]
+    }
+  },
+  "debug": false,
+  "ui": {
+    "theme": "dark",
+    "animations": {
+      "enabled": true,
+      "reducedMotion": false
+    }
+  },
+  "features": {
+    "autoComplete": true,
+    "codeActions": true,
+    "hoverInfo": true,
+    "diagnostics": true,
+    "formatOnSave": true,
+    "lintOnSave": true
+  },
+  "build": {
+    "strict": true,
+    "noEmitOnError": true,
+    "incremental": true
+  }
+}

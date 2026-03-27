@@ -1,0 +1,150 @@
+{
+  "_comment": "OpenCode Configuration for Premium UI/UX Website Development - $100k Worth Setup",
+  "data": {
+    "directory": ".opencode"
+  },
+  "providers": {
+    "openai": {
+      "apiKey": "${OPENAI_API_KEY}",
+      "disabled": false
+    },
+    "anthropic": {
+      "apiKey": "${ANTHROPIC_API_KEY}",
+      "disabled": false
+    },
+    "copilot": {
+      "disabled": false
+    },
+    "groq": {
+      "apiKey": "${GROQ_API_KEY}",
+      "disabled": true
+    },
+    "openrouter": {
+      "apiKey": "${OPENROUTER_API_KEY}",
+      "disabled": true
+    }
+  },
+  "agents": {
+    "coder": {
+      "model": "claude-3.7-sonnet",
+      "maxTokens": 64000,
+      "temperature": 0.1
+    },
+    "task": {
+      "model": "claude-3.7-sonnet",
+      "maxTokens": 64000,
+      "temperature": 0.2
+    },
+    "title": {
+      "model": "claude-3.7-sonnet",
+      "maxTokens": 100,
+      "temperature": 0.3
+    }
+  },
+  "shell": {
+    "path": "/bin/bash",
+    "args": ["-l"]
+  },
+  "mcpServers": {
+    "21st-dev-magic": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@21st-dev/magic@latest"],
+      "env": {
+        "API_KEY": "${TWENTY_FIRST_DEV_API_KEY}"
+      },
+      "description": "21st.dev Magic MCP - AI-powered UI component generation from natural language descriptions. Like v0 but in your IDE. Supports 20+ layouts, 35+ components, and 19 animations."
+    },
+    "magic-ui": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@magicuidesign/mcp@latest"],
+      "env": {},
+      "description": "Magic UI MCP - Official MCP server for Magic UI components. Access blur fade animations, marquee logos, grid backgrounds, and premium animated components."
+    },
+    "aceternity-ui": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "aceternityui-mcp@latest"],
+      "env": {},
+      "description": "Aceternity UI MCP - Premium animated components with 3D effects, parallax, and cinematic animations. Access the most premium UI components available."
+    },
+    "shadcn-ui": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@magnusrodseth/shadcn-mcp-server@latest"],
+      "env": {},
+      "description": "Shadcn UI MCP - Access 200+ shadcn/ui components and blocks. Provides component search, installation instructions, and code generation."
+    },
+    "tailwind-css": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@carbonodev/tailwindcss-mcp-server@latest"],
+      "env": {},
+      "description": "Tailwind CSS MCP - Utility class documentation, color palette generation, and responsive design assistance."
+    },
+    "motion-dev": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "motion-dev-mcp@latest"],
+      "env": {},
+      "description": "Motion.dev MCP - Animation code generation for React, JavaScript, and Vue. Production-quality animation components with offline documentation."
+    },
+    "framer-motion": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@picardraphael/mcp-server-documentation@latest"],
+      "env": {},
+      "description": "Documentation MCP - Unified access to Next.js, Tailwind, Framer Motion docs with intelligent search and code examples."
+    },
+    "rive-animations": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@astralisone/rive-mcp-server@latest"],
+      "env": {},
+      "description": "Rive MCP - Interactive animations and micro-interactions. Build lightweight, runtime animations for web."
+    }
+  },
+  "lsp": {
+    "typescript": {
+      "disabled": false,
+      "command": "typescript-language-server",
+      "args": ["--stdio"]
+    },
+    "tailwindcss": {
+      "disabled": false,
+      "command": "tailwindcss-language-server",
+      "args": ["--stdio"]
+    },
+    "html": {
+      "disabled": false,
+      "command": "html-languageserver",
+      "args": ["--stdio"]
+    },
+    "css": {
+      "disabled": false,
+      "command": "css-languageserver",
+      "args": ["--stdio"]
+    },
+    "json": {
+      "disabled": false,
+      "command": "json-languageserver",
+      "args": ["--stdio"]
+    }
+  },
+  "debug": false,
+  "ui": {
+    "theme": "dark",
+    "animations": {
+      "enabled": true,
+      "reducedMotion": false
+    }
+  },
+  "features": {
+    "autoComplete": true,
+    "codeActions": true,
+    "hoverInfo": true,
+    "diagnostics": true,
+    "formatOnSave": true
+  }
+}

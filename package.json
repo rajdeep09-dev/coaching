@@ -1,0 +1,45 @@
+{
+  "name": "opencode-premium-ui-config",
+  "version": "1.0.0",
+  "description": "Premium UI/UX MCP configuration for OpenCode CLI - $100k worth of web development power",
+  "main": "config.json",
+  "scripts": {
+    "setup": "bash setup.sh",
+    "install-mcps": "npm install -g @21st-dev/magic @magicuidesign/mcp aceternityui-mcp @magnusrodseth/shadcn-mcp-server @carbonodev/tailwindcss-mcp-server motion-dev-mcp @picardraphael/mcp-server-documentation @astralisone/rive-mcp-server",
+    "test": "opencode --version",
+    "clean": "rm -rf node_modules .opencode"
+  },
+  "keywords": [
+    "opencode",
+    "mcp",
+    "ui",
+    "ux",
+    "components",
+    "animations",
+    "magic-ui",
+    "aceternity",
+    "shadcn",
+    "tailwind",
+    "framer-motion",
+    "21st-dev"
+  ],
+  "author": "rajdeep09-dev",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rajdeep09-dev/coaching.git"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "devDependencies": {
+    "@21st-dev/magic": "latest",
+    "@magicuidesign/mcp": "latest",
+    "aceternityui-mcp": "latest",
+    "@magnusrodseth/shadcn-mcp-server": "latest",
+    "@carbonodev/tailwindcss-mcp-server": "latest",
+    "motion-dev-mcp": "latest",
+    "@picardraphael/mcp-server-documentation": "latest",
+    "@astralisone/rive-mcp-server": "latest"
+  }
+}

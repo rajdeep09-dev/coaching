@@ -1,0 +1,121 @@
+{
+  "data": {
+    "directory": ".opencode"
+  },
+  "providers": {
+    "openai": {
+      "disabled": true
+    },
+    "anthropic": {
+      "disabled": true
+    },
+    "copilot": {
+      "disabled": true
+    },
+    "groq": {
+      "disabled": true
+    },
+    "openrouter": {
+      "disabled": false
+    }
+  },
+  "agents": {
+    "coder": {
+      "model": "openrouter/nvidia/llama-3.1-nemotron-70b-instruct",
+      "maxTokens": 64000,
+      "temperature": 0.1
+    },
+    "task": {
+      "model": "openrouter/minimax/minimax-01",
+      "maxTokens": 32000,
+      "temperature": 0.15
+    },
+    "title": {
+      "model": "openrouter/moonshotai/kimi-k2",
+      "maxTokens": 100,
+      "temperature": 0.2
+    }
+  },
+  "shell": {
+    "path": "/bin/bash",
+    "args": ["-l"]
+  },
+  "mcpServers": {
+    "21st-dev-magic": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["${HOME}/.opencode/mcp-servers/21st-dev-magic/index.js"],
+      "env": {
+        "API_KEY": "${TWENTY_FIRST_DEV_API_KEY}"
+      }
+    },
+    "magic-ui": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["${HOME}/.opencode/mcp-servers/magic-ui/index.js"]
+    },
+    "aceternity-ui": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["${HOME}/.opencode/mcp-servers/aceternity-ui/index.js"]
+    },
+    "shadcn-ui": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["${HOME}/.opencode/mcp-servers/shadcn-ui/index.js"]
+    },
+    "tailwind-css": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["${HOME}/.opencode/mcp-servers/tailwind-css/index.js"]
+    },
+    "motion-dev": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["${HOME}/.opencode/mcp-servers/motion-dev/index.js"]
+    },
+    "framer-motion": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["${HOME}/.opencode/mcp-servers/framer-motion/index.js"]
+    },
+    "rive-animations": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["${HOME}/.opencode/mcp-servers/rive-animations/index.js"]
+    }
+  },
+  "lsp": {
+    "typescript": {
+      "disabled": false,
+      "command": "typescript-language-server",
+      "args": ["--stdio"]
+    },
+    "tailwindcss": {
+      "disabled": false,
+      "command": "tailwindcss-language-server",
+      "args": ["--stdio"]
+    },
+    "html": {
+      "disabled": false,
+      "command": "html-languageserver",
+      "args": ["--stdio"]
+    },
+    "css": {
+      "disabled": false,
+      "command": "css-languageserver",
+      "args": ["--stdio"]
+    },
+    "json": {
+      "disabled": false,
+      "command": "json-languageserver",
+      "args": ["--stdio"]
+    },
+    "eslint": {
+      "disabled": false,
+      "command": "eslint-lsp",
+      "args": ["--stdio"]
+    }
+  },
+  "debug": false
+}

@@ -1,0 +1,136 @@
+{
+  "data": {
+    "directory": ".opencode"
+  },
+  "providers": {
+    "openai": { "disabled": true },
+    "anthropic": { "disabled": true },
+    "copilot": { "disabled": true },
+    "groq": { "disabled": true },
+    "openrouter": { "disabled": false }
+  },
+  "agents": {
+    "coder": {
+      "model": "openrouter/nvidia/llama-3.1-nemotron-70b-instruct",
+      "maxTokens": 64000,
+      "temperature": 0.1
+    },
+    "task": {
+      "model": "openrouter/minimax/minimax-01",
+      "maxTokens": 32000,
+      "temperature": 0.15
+    },
+    "title": {
+      "model": "openrouter/moonshotai/kimi-k2",
+      "maxTokens": 100,
+      "temperature": 0.2
+    }
+  },
+  "shell": {
+    "path": "/bin/bash",
+    "args": ["-l"]
+  },
+  "mcpServers": {
+    "21st-dev-magic": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@21st-dev/magic@latest"],
+      "env": { "API_KEY": "${TWENTY_FIRST_DEV_API_KEY}" }
+    },
+    "magic-ui": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@magicuidesign/mcp@latest"]
+    },
+    "aceternity-ui": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "aceternityui-mcp@latest"]
+    },
+    "shadcn-ui": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@shadcn-ui/mcp@latest"]
+    },
+    "chadcn-ui": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@chadcn/ui-mcp@latest"]
+    },
+    "motion-primitives": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@motion-primitives/mcp@latest"]
+    },
+    "number-flow": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@number-flow/mcp@latest"]
+    },
+    "vaul": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@vaul/mcp@latest"]
+    },
+    "uploadthing": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@uploadthing/mcp@latest"]
+    },
+    "tiptap": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@tiptap/mcp@latest"]
+    },
+    "react-bits": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@react-bits/mcp@latest"]
+    },
+    "kokonut-ui": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@kokonut/ui-mcp@latest"]
+    },
+    "react-scan": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@react-scan/mcp@latest"]
+    },
+    "react-tweet": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@react-tweet/mcp@latest"]
+    },
+    "zod": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@zod/mcp@latest"]
+    }
+  },
+  "lsp": {
+    "typescript": {
+      "disabled": false,
+      "command": "typescript-language-server",
+      "args": ["--stdio"]
+    },
+    "tailwindcss": {
+      "disabled": false,
+      "command": "tailwindcss-language-server",
+      "args": ["--stdio"]
+    },
+    "eslint": {
+      "disabled": false,
+      "command": "eslint-lsp",
+      "args": ["--stdio"]
+    }
+  },
+  "debug": false,
+  "skills": {
+    "premium-ui-orchestrator": {
+      "path": "~/.opencode/skills/premium-ui-orchestrator.md",
+      "autoRun": true,
+      "beforeEveryPrompt": true
+    }
+  }
+}
